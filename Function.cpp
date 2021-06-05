@@ -145,21 +145,21 @@ void suckin()
 {
 	SendCmd("[7# IO.Set DOUT(20103),0]", "");
 	SendCmd("[7# IO.Set DOUT(20104),1]", "");
-	Sleep(500);
+	Sleep(100);
 }
 
 void suckout()
 {
 	SendCmd("[7# IO.Set DOUT(20103),1]", "");
 	SendCmd("[7# IO.Set DOUT(20104),0]", "");
-	Sleep(500);
+	Sleep(100);
 }
 
 void suckoff()
 {
 	SendCmd("[7# IO.Set DOUT(20103),0]", "");
 	SendCmd("[7# IO.Set DOUT(20104),0]", "");
-	Sleep(500);
+	//Sleep(100);
 }
 
 

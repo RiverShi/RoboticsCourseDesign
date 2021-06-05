@@ -25,7 +25,6 @@ double moving_time[100];
 
 void target_to_pos(const My_rec& rec, PosStruct &pos);
 void generate_traj();
-void test();
 
 vector<string> plan_result;
 CHLMotionPlan MyPlan;
@@ -33,12 +32,12 @@ CHLMotionPlan MyPlan;
 int main()
 {   
 
-	// RobotConnect();
-	// Robot_init();
-	// Robot_to_initial_pose(); 
+	 RobotConnect();
+	 Robot_init();
+	 Robot_to_initial_pose(); 
 
-	// int t = getchar();
-	// if(t == '1')Get_RGB();
+	 int t = getchar();
+	 if(t == '1')Get_RGB();
 	
 	vector<My_rec> target;
 
@@ -58,9 +57,9 @@ int main()
 
 	//设置速度规划参数
 	//50，200，50 可
-	MyPlan.SetProfile(40, 160, 40); 
+	MyPlan.SetProfile(50, 200, 50); 
 	//10, 40, 10 偏慢
-	MyPlan.SetProfileJ(15, 60, 15); 
+	MyPlan.SetProfileJ(20, 80, 20); 
 	MyPlan.SetSampleTime(0.001);
 
 
@@ -101,22 +100,22 @@ int main()
 
 	 
 
-	// cout << "running_data0.txt"<< endl;
-	// PPB_run("data/data0.txt", ceil(moving_time[i+1])*1000 + 300);
+	 cout << "running_data0.txt"<< endl;
+	 PPB_run("data/data0.txt", ceil(moving_time[0])*1000 + 300);
 
-	// for (i = 1; i <=12; i += 2)
-	// {
-	// 	suckin();
-	// 	cout << "running_data" + to_string(i) << endl;
-	//  	PPB_run("data/data" + to_string(i) + ".txt",ceil(moving_time[i+1])*1000 + 300);
-	// 	suckout();
-	// 	suckoff();
-	// 	cout << "running_data" + to_string(i+1) << endl;
-	//  	PPB_run("data/data" + to_string(i) + ".txt", ceil(moving_time[i+1])*1000 + 300);
-	// }
+	 for (i = 1; i <=12; i += 2)
+	 {
+	 	suckin();
+	 	cout << "running_data" + to_string(i) << endl;
+		PPB_run("data/data" + to_string(i) + ".txt",ceil(moving_time[i])*1000 + 300);
+	 	suckout();
+	 	suckoff();
+	 	cout << "running_data" + to_string(i+1) << endl;
+	  	PPB_run("data/data" + to_string(i+1) + ".txt", ceil(moving_time[i+1])*1000 + 300);
+	 }
 
-	// cout << "running_data13" << endl;
-	// PPB_run("data/data13.txt", ceil(moving_time[i+1])*1000 + 300);
+	 cout << "running_data13" << endl;
+	 PPB_run("data/data13.txt", ceil(moving_time[13])*1000 + 300);
 
 
 	void PPB_stop();

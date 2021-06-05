@@ -265,7 +265,7 @@ Point3f camera_to_world(Point3f p)
 	wxyz = T * cxyz;
 
 	Point3f wpoint;
-	wpoint.x = wxyz.at<float>(0, 0) +0.004;//雷版
+	wpoint.x = wxyz.at<float>(0, 0) - 0.003;//雷版
 	//wpoint.x = wxyz.at<float>(0, 0);
 	wpoint.y = wxyz.at<float>(1, 0) + 0.012;//雷版
 	//wpoint.y = wxyz.at<float>(1, 0);
