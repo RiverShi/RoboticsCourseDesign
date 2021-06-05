@@ -7,7 +7,6 @@ using namespace std;
 #include "Function.h"
 #include "RecDect.h"
 #include<iostream>
-#include"MotionPlan\MotionPlan.h"
 #include"FtpControl.h"
 
 

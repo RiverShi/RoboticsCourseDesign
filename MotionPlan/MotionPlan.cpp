@@ -286,7 +286,7 @@ double CHLMotionPlan::GetPlanPoints_line(vector<string> &result)
 
 		HLRobot::SetPose(pose);
 		HLRobot::GetAngles(angle);
-
+		 
 		//反解的关节坐标点
 		for(i = 1; i <= 5; i++)str = str + to_string(angle[i]) + " ";
 		str = str + to_string(angle[i]);
@@ -309,9 +309,6 @@ double CHLMotionPlan::GetPlanPoints_line(vector<string> &result)
 			cout << "关节坐标： " << str << endl;
 			cout << endl;
 		}
-
-
-
 	}
 	return total_time;
 } 

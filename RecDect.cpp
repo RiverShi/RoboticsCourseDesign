@@ -10,14 +10,14 @@
 #include <opencv2/opencv.hpp>
 #include "fstream"
 #include <librealsense2/rs.hpp>
+#include "commom_define.h"
 
 using namespace cv;
 using namespace std;
 
 #define W_DST "dstImage" 
 #define W_RST "resultImage"
-#define PI 3.1415926
-#define fps  30
+const int fps = 30;
 
 //变量声明
 int h_min1 = 0;

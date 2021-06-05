@@ -4,7 +4,7 @@
 #include "FtpControl.h"
 #include "RecDect.h"
 #include "Function.h"
-#include "MotionPlan/MotionPlan.h"
+#include "MotionPlan.hpp"
 #include <opencv/cv.h>
 #include <string.h>
 #include <vector>
@@ -76,14 +76,13 @@ int main()
 	// PPB_run("data/data.txt");
 	
 	
-	//generate_traj();
+	generate_traj();
 
-	test();
 
-	for (i = 0; i <= 13; i++)
-	{
-		cout << moving_time[i] << endl;
-	}
+	 for (i = 0; i <= 13; i++)
+	 {
+	 	cout << moving_time[i] << endl;
+	 }
 
 	//string filename, name;
 	//for (i = 0; i <=13; i++)
@@ -263,7 +262,4 @@ void generate_traj()
 
 	return;
 }
-
-
-
 

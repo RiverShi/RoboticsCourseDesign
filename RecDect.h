@@ -14,15 +14,16 @@
 #include "fstream"
 #include <librealsense2/rs.hpp>
 
+
 //using namespace cv;
 using namespace std;
 
 
 constexpr auto W_DST = "dstImage";
 constexpr auto W_RST =  "resultImage";
-#define PI 3.1415926;
-#define fps 30;
+//#define fps 30;
 
+const double PI = 3.1415926;
 
 
 //j矩形识别头文件，请自行添加需要的函数

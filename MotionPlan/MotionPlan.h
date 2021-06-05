@@ -51,8 +51,5 @@ public:
 	void SetProfileJ(double vel, double acc, double dec);
 	void GetPlanPoints(vector<string>& result);											//获取轨迹规划后离散点位	
 	double GetPlanPoints_line(vector<string>& result);										//获取轨迹规划后离散点位
-
 };
 
-
-void get_plan(PosStruct startpos, PosStruct endpos, vector<string> &result);
