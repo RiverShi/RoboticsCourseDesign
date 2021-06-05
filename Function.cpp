@@ -130,9 +130,8 @@ void PPB_run(string filename, int sleeptime)
 	SendCmd("[1# Robot.Frame 1,1]", "关节坐标系");
 	SendCmd("[3# PPB.ReadFile 1, /data/severdata.txt]", "读取文件");
 	SendCmd("[4# PPB.J2StartPoint 1,0,1]", "运动到起点", 1000);
-	SendCmd("[4# PPB.Run 1]", "运动");
+	SendCmd("[4# PPB.Run 1]", "运动", sleeptime);
 	cout << endl;
-	Sleep(sleeptime);
 }
 
 void PPB_stop()

@@ -25,6 +25,7 @@ double moving_time[100];
 
 void target_to_pos(const My_rec& rec, PosStruct &pos);
 void generate_traj();
+void test();
 
 vector<string> plan_result;
 CHLMotionPlan MyPlan;
@@ -32,12 +33,12 @@ CHLMotionPlan MyPlan;
 int main()
 {   
 
-	RobotConnect();
-	Robot_init();
-	Robot_to_initial_pose(); 
+	// RobotConnect();
+	// Robot_init();
+	// Robot_to_initial_pose(); 
 
-	int t = getchar();
-	if(t == '1')Get_RGB();
+	// int t = getchar();
+	// if(t == '1')Get_RGB();
 	
 	vector<My_rec> target;
 
@@ -75,7 +76,9 @@ int main()
 	// PPB_run("data/data.txt");
 	
 	
-	generate_traj();
+	//generate_traj();
+
+	test();
 
 	for (i = 0; i <= 13; i++)
 	{
@@ -91,30 +94,30 @@ int main()
 	//	FtpControl::Upload("192.168.10.101", "data", filename.c_str(), name.c_str());
 	//}
 
-	for (i = 0; i <= 13; i++)
-	{
-		cout << "running_data" + to_string(i) << endl;
-		PPB_run("data/data" + to_string(i) + ".txt", int(moving_time[i+1]*1000)+300);
-	}
+	//for (i = 0; i <= 13; i++)
+	//{
+	//	cout << "running_data" + to_string(i) << endl;
+	//	PPB_run("data/data" + to_string(i) + ".txt", ceil(moving_time[i+1])*1000 + 300 );
+	//}
 
 	 
 
 	// cout << "running_data0.txt"<< endl;
-	// PPB_run("data/data0.txt", int(moving_time[0]*1000)+300);
+	// PPB_run("data/data0.txt", ceil(moving_time[i+1])*1000 + 300);
 
 	// for (i = 1; i <=12; i += 2)
 	// {
 	// 	suckin();
 	// 	cout << "running_data" + to_string(i) << endl;
-	//  	PPB_run("data/data" + to_string(i) + ".txt",int(moving_time[i]*1000)+300);
+	//  	PPB_run("data/data" + to_string(i) + ".txt",ceil(moving_time[i+1])*1000 + 300);
 	// 	suckout();
 	// 	suckoff();
 	// 	cout << "running_data" + to_string(i+1) << endl;
-	//  	PPB_run("data/data" + to_string(i) + ".txt", int(moving_time[i+1]*1000)+300);
+	//  	PPB_run("data/data" + to_string(i) + ".txt", ceil(moving_time[i+1])*1000 + 300);
 	// }
 
 	// cout << "running_data13" << endl;
-	// PPB_run("data/data13.txt", int(moving_time[13]*1000)+300);
+	// PPB_run("data/data13.txt", ceil(moving_time[i+1])*1000 + 300);
 
 
 	void PPB_stop();

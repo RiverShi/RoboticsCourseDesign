@@ -280,8 +280,8 @@ double CHLMotionPlan::GetPlanPoints_line(vector<string> &result)
 		pose[5] = start_pitch + plan_zyz[2].get_pos(t);
 		pose[6] = start_roll + plan_zyz[3].get_pos(t);
 		//规划的空间坐标点
-		// for (i = 1; i <= 5; i++)temp = temp + to_string(pose[i]) + " ";
-		// temp = temp + to_string(pose[i]);
+		for (i = 1; i <= 5; i++)temp = temp + to_string(pose[i]) + " ";
+		temp = temp + to_string(pose[i]);
 		//if (rand() % 1024 == 0)cout << "空间坐标：" << temp << endl;	//随机打印部分结果，表示还程序运行中
 
 		HLRobot::SetPose(pose);
@@ -300,6 +300,18 @@ double CHLMotionPlan::GetPlanPoints_line(vector<string> &result)
 
 		result.push_back(str);
 		t += mSampleTime;  count++;
+
+		if(count >= 2820 && count <= 2830)
+		{
+			cout << "t = " << t << "s " << endl;
+			cout << "L = " << L << endl;
+			cout << "空间坐标： " << temp << endl;
+			cout << "关节坐标： " << str << endl;
+			cout << endl;
+		}
+
+
+
 	}
 	return total_time;
 } 
