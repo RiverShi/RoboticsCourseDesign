@@ -12,6 +12,11 @@ using namespace std;
 using namespace HLRobot;
 using namespace Eigen;
 
+struct LFPB;
+struct Cubic;
+struct PosStruct;
+class CHLMotionPlan;
+
 struct PosStruct
 {
 	double x;				// x坐标，单位mm
@@ -33,6 +38,29 @@ struct PosStruct
 		yaw = yyaw;  pitch = ppitch;  roll = rroll;
 	}
 };
+
+struct Point_info
+{
+	double pose[8];
+	double angle[8];
+	double &x = pose[1], &y = pose[2], &z = pose[3];
+	double &yaw = pose[4], &pitch = pose[5], &roll = pose[6];
+
+	void assign(PosStruct P)
+	{
+		x = P.x;  y = P.y;  z = P.z;
+		yaw = P.yaw;  pitch = P.pitch; roll = P.roll;
+	}
+	
+	void assign(double p1, double p2, double p3, double p4, double p5, double p6)
+	{
+		x = p1;  y = p2;  z = p3;
+		yaw = p4;  pitch = p5; roll = p6;
+	}
+};
+
+
+
 
 struct LFPB
 {
@@ -296,7 +324,7 @@ public:
 		LFPB plan_zyz[4];
 
 		plan_space.init(mAcc, mVel, mDec, dis);
-		plan_zyz[1].init(JmAcc, JmVel, JmDec, end_yaw-start_yaw);
+		plan_zyz[1].init(JmAcc, JmVel, JmDec, end_yaw-start_yaw); 
 		plan_zyz[2].init(JmAcc, JmVel, JmDec, end_pitch-start_pitch);
 		plan_zyz[3].init(JmAcc, JmVel, JmDec, end_roll-start_roll);
 
@@ -306,7 +334,7 @@ public:
 
 		double t = 0, L;
 		int count = 0;
-		while(t < total_time)
+		while(t < total_time)  
 		{
 			string str = "", temp = "";
 			L = plan_space.get_pos(t);
@@ -337,4 +365,35 @@ public:
 	} 
 
 };
+
+
+struct Cubic
+{
+	double po, vo, pf, vf;
+	double td, h;
+	double a0, a1, a2, a3;
+
+	void init(double a, double b, double c, double d, double Td)
+	{
+		po = a; vo = b; pf = c; vf = d;
+		td = Td; h = pf-po;
+		a0 = po;
+		a1 = vo;
+		a2 = (3*h - (2*vo+vf)*td )/(td*td);
+		a3 = (-2*h+(vo+vf)*td) / (td*td*td);
+	}
+
+	double get_pos(double t)
+	{
+		return a0 + a1*t + a2*t*t + a3*t*t*t;
+	}
+};
+
+
+
+
+
+
+
+
 

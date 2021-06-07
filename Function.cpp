@@ -109,18 +109,6 @@ void Robot_to_initial_pose()
 	cout << endl;
 }
 
-//void PPB_run(string filename)
-//{
-//	string runningfile = "[3# PPB.ReadFile 1, " + filename + "]";
-//
-//	SendCmd("[1# Robot.Frame 1,1]",                     "关节坐标系");
-//    SendCmd("[2# PPB.Enable 1,1]",                      "PPB使能");
-//    SendCmd(runningfile.c_str(),						"读取文件");
-//    SendCmd("[4# PPB.J2StartPoint 1,0,1]",              "运动到起点", 	1000);
-//	SendCmd("[4# PPB.Run 1]",                         	"运动",    		8000);
-//	cout << endl;
-//}
-
 void PPB_run(string filename, int sleeptime)
 {
 	cout << "上传文件 : " << filename << endl;
@@ -137,8 +125,6 @@ void PPB_stop()
 {
 	SendCmd("[1# PPB.Enable 1,0]", "退出PPB模式");
 }
-
-
 
 
 void suckin()
@@ -162,51 +148,3 @@ void suckoff()
 	//Sleep(100);
 }
 
-
-
-/*
-// void PPB_suck(int i)
-// {
-// 	//气阀控制
-// 	if (i == 1 || 3 || 5 || 7 || 9 || 11)
-// 	{
-// 		cout << "吸气开启，等待0.8s" << endl;
-// 		//吸气，一直吸气
-// 		send_len = send(s_server, "[7# IO.Set DOUT(20103),0]", 100, 0);
-// 		recv_len = recv(s_server, recv_buf, 100, 0);
-// 		cout << recv_buf << endl;
-// 		memset(recv_buf, '\0', sizeof(recv_buf));
-
-// 		send_len = send(s_server, "[8# IO.Set DOUT(20104),1]", 100, 0);
-// 		recv_len = recv(s_server, recv_buf, 100, 0);
-// 		cout << recv_buf << endl;
-// 		memset(recv_buf, '\0', sizeof(recv_buf));
-
-// 		Sleep(800);
-// 	}
-// 	else if(i == 2 || 4 || 6 || 8 || 10 || 12)
-// 	{
-// 		cout << "吸气关闭，放气开启0.8s，然后关闭放气" << endl;
-// 		//放气0.8s然后关闭放气
-// 		send_len = send(s_server, "[7# IO.Set DOUT(20103),1]", 100, 0);
-// 		recv_len = recv(s_server, recv_buf, 100, 0);
-// 		cout << recv_buf << endl;
-// 		memset(recv_buf, '\0', sizeof(recv_buf));
-
-// 		send_len = send(s_server, "[8# IO.Set DOUT(20104),0]", 100, 0);
-// 		recv_len = recv(s_server, recv_buf, 100, 0);
-// 		cout << recv_buf << endl;
-// 		memset(recv_buf, '\0', sizeof(recv_buf));
-
-// 		Sleep(800);
-// 		send_len = send(s_server, "[7# IO.Set DOUT(20103),0]", 100, 0);
-// 		recv_len = recv(s_server, recv_buf, 100, 0);
-// 		cout << recv_buf << endl;
-// 		memset(recv_buf, '\0', sizeof(recv_buf));;
-// 	}
-// 	else 
-// 	{
-// 		cout << "其他阶段，气阀不变" << endl;
-// 	}
-// }
-*/
