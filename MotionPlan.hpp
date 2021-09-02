@@ -242,6 +242,15 @@ public:
 		mJointAngleBegin[4] = angle5;
 		mJointAngleBegin[5] = angle6;
 
+		printf("%lf %lf %lf %lf %lf %lf\n", startPos.x, startPos.y, startPos.z, startPos.yaw, startPos.pitch, startPos.roll);
+		printf("%lf %lf %lf %lf %lf %lf\n", angle1, angle2, angle3, angle4, angle5, angle6);
+		HLRobot::SetRobotJoint(angle1, angle2, angle3, angle4, angle5, angle6);
+		HLRobot::GetJointEndPos(startPos.x, startPos.y, startPos.z, startPos.yaw, startPos.pitch, startPos.roll);
+		printf("%lf %lf %lf %lf %lf %lf\n", startPos.x, startPos.y, startPos.z, startPos.yaw, startPos.pitch, startPos.roll);
+		cout << endl;
+
+
+
 		HLRobot::SetRobotEndPos(endPos.x, endPos.y, endPos.z, endPos.yaw, endPos.pitch, endPos.roll);
 		HLRobot::GetJointAngles(angle1, angle2, angle3, angle4, angle5, angle6);
 		mJointAngleEnd[0] = angle1;
@@ -251,12 +260,24 @@ public:
 		mJointAngleEnd[4] = angle5;
 		mJointAngleEnd[5] = angle6;
 
+
+		printf("%lf %lf %lf %lf %lf %lf\n", endPos.x, endPos.y, endPos.z, endPos.yaw, endPos.pitch, endPos.roll);
+		printf("%lf %lf %lf %lf %lf %lf\n", angle1, angle2, angle3, angle4, angle5, angle6);
+		HLRobot::SetRobotJoint(angle1, angle2, angle3, angle4, angle5, angle6);
+		HLRobot::GetJointEndPos(endPos.x, endPos.y, endPos.z, endPos.yaw, endPos.pitch, endPos.roll);
+		printf("%lf %lf %lf %lf %lf %lf\n", endPos.x, endPos.y, endPos.z, endPos.yaw, endPos.pitch, endPos.roll);
+		cout << endl;
+
+
 		start_x = startPos.x; start_y = startPos.y; start_z = startPos.z;
 		start_yaw = startPos.yaw; start_pitch = startPos.pitch; start_roll = startPos.roll;
 		end_x = endPos.x; end_y = endPos.y; end_z = endPos.z;
 		end_yaw = endPos.yaw; end_pitch = endPos.pitch; end_roll = endPos.roll;
 		sp = startPos;
 		ep = endPos;
+
+
+
 
 	}
 
@@ -283,7 +304,7 @@ public:
 		//计算每个轴旋转的角度
 		double deg[10];
 		int i;
-		for (i = 1; i <= 6; i++)deg[i] = mJointAngleEnd[i] - mJointAngleBegin[i];
+		for (i = 1; i <= 6; i++)deg[i] = mJointAngleEnd[i-1] - mJointAngleBegin[i-1];
 
 		//计算每个轴移动到终止点所需要时间
 		LFPB plan[10];
@@ -292,18 +313,28 @@ public:
 		for(i = 1; i <= 6; i++)total_time = max(total_time, plan[i].t3);
 		total_time += 0.01;
 
+		ofstream aout; aout.open("lab4/data4.txt");
 		double t = 0, pose[10], angle[10];
 		while(t < total_time)
 		{
 			string str = "", temp = ""  ;
-			for(i = 1; i <= 6; i++)angle[i] = mJointAngleBegin[i] + plan[i].get_pos(t);
+			for(i = 1; i <= 6; i++)angle[i] = mJointAngleBegin[i-1] + plan[i].get_pos(t);
 			for(i = 1; i <= 5; i++)str = str + to_string(angle[i]) + " ";
 			str = str + to_string(angle[6]);
 
+			HLRobot::SetAngles(angle);
+			HLRobot::GetPose(pose);
+			for (i = 1; i <= 6; i++)temp = temp + to_string(pose[i]) + " "; aout << temp << endl;
+
 			result.push_back(str);
 			t += mSampleTime;
+
+			cout << temp << endl;
+			cout << str << endl;
+			cout << endl;
 		}
 		//完成代码;
+		aout.close();
 		return;
 	}
 
@@ -334,6 +365,7 @@ public:
 
 		double t = 0, L;
 		int count = 0;
+		ofstream aout; aout.open("lab4/data2.txt");
 		while(t < total_time)  
 		{
 			string str = "", temp = "";
@@ -348,7 +380,7 @@ public:
 			for (i = 1; i <= 5; i++)temp = temp + to_string(pose[i]) + " ";
 			temp = temp + to_string(pose[i]);
 			//if (rand() % 1024 == 0)cout << "空间坐标：" << temp << endl;	//随机打印部分结果，表示还程序运行中
-
+			aout << temp << endl;
 			HLRobot::SetPose(pose);
 			HLRobot::GetAngles(angle);
 			
@@ -361,6 +393,7 @@ public:
 			t += mSampleTime;  count++;
 
 		}
+		aout.close();
 		return total_time;
 	} 
 

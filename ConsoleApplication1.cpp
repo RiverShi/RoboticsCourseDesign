@@ -37,49 +37,54 @@ fstream Aout, Bout;
 int main()
 {   
 
-	  RobotConnect();
-	  Robot_init();
-	  Robot_to_initial_pose(); 
+	  //RobotConnect();
+	  //Robot_init();
+	  //Robot_to_initial_pose(); 
 
 	//  int t = getchar();
 	//  if(t == '1')Get_RGB();
 	
-	vector<My_rec> target;
+	//vector<My_rec> target;
 
-	ColorDect(target, "test2.png");
-	waitKey(30);
+	//ColorDect(target, "test2.png");
+	//waitKey(30);
 
-	num = target.size();
+	//num = target.size();
 	int i = 0;
-	for (i = 0; i < num; i++)target_to_pos(target[i], dst[i + 1]);
-	cout << "目标空间坐标：" << endl;
-	for (i = 1; i <= num; i++)printf("%lf %lf %lf %lf %lf %lf\n", dst[i].x, dst[i].y, dst[i].z, dst[i].yaw, dst[i].pitch, dst[i].roll);
-	cout << endl;
+	//for (i = 0; i < num; i++)target_to_pos(target[i], dst[i + 1]);
+	//cout << "目标空间坐标：" << endl;
+	//for (i = 1; i <= num; i++)printf("%lf %lf %lf %lf %lf %lf\n", dst[i].x, dst[i].y, dst[i].z, dst[i].yaw, dst[i].pitch, dst[i].roll);
+	//cout << endl;
 
 	//设置初始坐标点位
-	PosStruct initpos(410, 0, 800, 0, 180, 138);
-	PosStruct endpos(500, 0, 600, 100, 180, 138);
+	//PosStruct initpos(410, 0, 800, 0, 180, 138);
+	//PosStruct endpos(500, 0, 600, 100, 180, 138);
+
+	PosStruct initpos(415.746, -219.622, 920.636, -29.489, 178.867, -33.751);
+	PosStruct endpos(555.893, -54.405, 920.636, -8.288, 178.867, -33.751);
 
 	//设置速度规划参数
 	//50，200，50 可
-	MyPlan.SetProfile(50, 200, 50); 
+	MyPlan.SetProfile(200, 100, 200); 
 	//10, 40, 10 偏慢
-	MyPlan.SetProfileJ(20, 80, 20); 
+	MyPlan.SetProfileJ(20, 20, 20); 
 	MyPlan.SetSampleTime(0.001);
 
+	freopen("lab4/data5.txt", "w", stdout);
+	 MyPlan.SetPlanPoints(initpos, endpos);
+	 MyPlan.GetPlanPoints(plan_result);
 
-	// MyPlan.SetPlanPoints(initpos, endpos);
-	// MyPlan.GetPlanPoints_line(plan_result);
-
-	// ofstream fout;
-	// fout.open("data/data.txt");
-	// for (string str : plan_result)fout << str << endl;
-	// fout.close();
-	// plan_result.clear();
+	 ofstream fout;
+	 fout.open("lab4/data3.txt");
+	 for (string str : plan_result)fout << str << endl;
+	 fout.close();
+	 plan_result.clear();
 
 	// PPB_run("data/data.txt");
 
 	
+	 return 0;
+
 //*******尝试三次插值****************************************************************
 	
 	Aout.open("data/A.txt");
